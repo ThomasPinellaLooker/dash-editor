@@ -1,6 +1,7 @@
 import { dashboardsActions } from './actions'
 import { setFilters } from './filters/actions'
 import { setElements } from './elements/actions'
+import { middleware as draftFiltersMiddleware } from './draft_filters/middleware'
 
 const dashboardSuccess = store => next => action => {
   next(action)
@@ -17,4 +18,7 @@ const dashboardSuccess = store => next => action => {
   }
 }
 
-export const middleware = [dashboardSuccess]
+export const middleware = [
+  dashboardSuccess,
+  ...draftFiltersMiddleware,
+]

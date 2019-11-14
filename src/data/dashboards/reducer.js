@@ -4,6 +4,7 @@ import { reducer as elements } from './elements/reducer'
 import { reducer as titles } from './titles/reducer'
 import { reducer as filters } from './filters/reducer'
 import { reducer as queries } from './queries/reducer'
+import { reducer as draftFilters } from './draft_filters/reducer'
 
 export const reducer = combineReducers({
   layoutComponents,
@@ -11,4 +12,5 @@ export const reducer = combineReducers({
   titles,
   filters,
   queries,
+  draftFilters,
 })
