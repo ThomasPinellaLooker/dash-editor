@@ -36,6 +36,7 @@ const Filters = ({ inEditMode, filters, updateFilter, openFilterEditor, closeFil
 
   return (
     <div>
+      {inEditMode && <button onClick={handleEditButtonClick.bind(null, '-1')}>Add new filter</button>}
       {filterComponents}
       {editorIsOpen && (
         <Modal>

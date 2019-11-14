@@ -36,7 +36,7 @@ export const FilterEditor = ({ filter, onExitClick, updateFilter, save }) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  filter: state.data.dashboards.draftFilters[props.filterId],
+  filter: state.data.dashboards.draftFilters[props.filterId] || { [props.filterId]: {} },
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
