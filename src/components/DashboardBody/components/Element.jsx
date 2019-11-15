@@ -49,7 +49,7 @@ export const Element = ({ inEditMode, layoutComponent, updateLayoutComponent }) 
           backGroundColor: 'darkgray',
         }}
       >
-        :::
+        {inEditMode && ':::'}
       </div>
     </div>
   )

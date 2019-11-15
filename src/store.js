@@ -11,6 +11,6 @@ export const registerSagas = (callbacks) => {
   callbacks.forEach(callback => sagaMiddleware.run(callback))
 }
 
-export const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware, sagaMiddleware)))
+export const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware, ...middleware)))
 
 registerSagas(sagas)

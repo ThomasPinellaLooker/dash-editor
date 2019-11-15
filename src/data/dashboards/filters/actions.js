@@ -1,6 +1,7 @@
 export const filterActions = {
   UPDATE_FILTER: '[filters] updateFilter',
-  SET_FILTERS: '[filters] setFilters'
+  SET_FILTERS: '[filters] setFilters',
+  SUGGESTIONS_LOADED: '[filters] suggestionsLoaded'
 }
 
 export const updateFilter = (id, value) => ({
@@ -15,5 +16,13 @@ export const setFilters = (filters) => ({
   type: filterActions.SET_FILTERS,
   payload: {
     filters,
+  }
+})
+
+export const suggestionsLoaded = (id, suggestions) => ({
+  type: filterActions.SUGGESTIONS_LOADED,
+  payload: {
+    id,
+    suggestions,
   }
 })

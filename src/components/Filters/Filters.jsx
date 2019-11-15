@@ -28,7 +28,7 @@ const Filters = ({ inEditMode, filters, updateFilter, openFilterEditor, closeFil
     }
     return (
       <div key={filter.id} style={{ display: 'flex' }}>
-        <Filter onChange={handleChange} value={filter.value} />
+        <Filter onChange={handleChange} filter={filter} />
         {inEditMode && <button onClick={handleEditButtonClick.bind(null, filter.id)}>Edit</button>}
       </div>
     )

@@ -24,7 +24,7 @@ export const FilterEditor = ({ filter, onExitClick, updateFilter, save }) => {
       <div>
         Edit Filter:
       </div>
-      <Filter onChange={handleChange} value={filter.value} />
+      <Filter onChange={handleChange} filter={filter} />
       <div
         style={{ display: 'flex', position: 'absolute', right: '10px', bottom: '5px' }}
       >

@@ -12,6 +12,15 @@ export const reducer = (state = {}, action) => {
           value,
         },
       }
+    case filterActions.SUGGESTIONS_LOADED:
+      const { id: filterId, suggestions } = action.payload
+      return {
+        ...state,
+        [filterId]: {
+          ...state[filterId],
+          suggestions,
+        }
+      }
     case filterActions.SET_FILTERS:
       return action.payload.filters
     case draftFiltersActions.SAVE_CHANGES_SUCCESS:
