@@ -59,9 +59,17 @@ A big advantage of structuring edit mode in this way is that the item at hand (t
 
 Just as we copied the `dashboards` state to accomodate for saving/cancelling edits, we must do with same with filters. In this case, copying it to a sibling state called `draft_filters`. However, this time we want to point the edit filter UI to read from and write to this new copied version of filters in `draft_filters`. Because we're no longer keeping reads and writes to a single source, complexities that we'd avoided at the `dashboards` level crop up here.
 
-// problem: because we're renaming every filters action, certain sagas will no longer be
-// triggered...
+Because we want the filters in `draft_filters` to essentially act the same as the filters in `filters`, it would be great to re-use the `filters` reducer instead of rewriting it. However, simply calling the `filters` reducer in `draft_filters`, while allowing us to get `draft_filters` to act the same as `filters`, will still be executing for regular `filters`, causing changes to appear in two places. But, editing a filter should only cause changes in one place: `draft_filters`. To circumvent this problem, we use middleware to listen for every `filters` related action. If we intercept one and we're editing a filter, then we stop that action from being passed on and instead dispatch a single `draft_filters` action that holds the `filters` related action as a payload. This then gets passed on to the `draft_filters` reducer which, in turn, passes the saved `filters` action (in its payload) into the `filters` reducer, whose returned state will then directly populate `draft_filters`.
 
+Since certain filter actions depend on sagas (such as fetching filter suggestions), it is important that the custom middleware that does the action re-routing happen after the saga middleware executes. If it occurs before, then the saga will never fire.
+
+### Open Questions
+
+I decided to separate `saved_off_dashboard/` from `edit_dashboard_mode/` because they really are distinct entities: you can imagine that a savedOffDashboard may exist in a world without edits. And this way, it more clearly mirrors the structure we see in `dashboards/`. However, it may also be worth simply combining these two as `inEditMode` can be an inferred piece of state, and `edit_dashboard_mode/` won't be doing much else necessarily.
+
+The location of `draft_filters` is also very much up for debate. I placed it beside `filters/` here to mimic a more recursive directory structure, where the edit version of any state is placed beside it, just as `saved_off_dashboard/` is placed beside `dashboards/`. The drawback is that `dashboards` is now no longer a clean representation of the exact state needed to render a dashboard; it now contains extra edit-related data. This issue is easily remedied through the use of selectors, but the directory may appear slightly polluted. The alternative is we place `draft_filters` a level up, either sibling to `dashboards/` or into `edit_dashboard_mode/`, as it is edit-related. I'd lean towards the latter. Given that the responsibility of `edit_dashboard_mode/` is to store edit-related data, this would make sense. The drawback being, however, that we break the pattern of storing edits beside their original.
+
+Finally, I used custom middleware quite exensively mostly because it requires less boilerplate than sagas and, partially for that reason, is quicker and easier to write. However, for getting `draft_filters` to work by transforming all `filters` actions into a single `draft_filters` action, I found no obvious way to do this using sagas while finding it intuitive and obvious through the use of custom middleware. Custom middleware basically gives full control over the propogation of all actions, a luxury not afforded by sagas, which was necessary for getting editable filters to work.
 
 
 ## Available Scripts
