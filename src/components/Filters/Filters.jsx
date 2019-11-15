@@ -35,9 +35,11 @@ const Filters = ({ inEditMode, filters, updateFilter, openFilterEditor, closeFil
   })
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'yellow' }}>
       {inEditMode && <button onClick={handleEditButtonClick.bind(null, '-1')}>Add new filter</button>}
-      {filterComponents}
+      <div style={{ display: 'flex', padding: '20px' }}>
+        {filterComponents}
+      </div>
       {editorIsOpen && (
         <Modal>
           <ConnectedFilterEditor onExitClick={handleExitClick} filterId={filterSelected} />

@@ -2,6 +2,7 @@ import { dashboardsActions } from './actions'
 import { setFilters } from './filters/actions'
 import { setElements } from './elements/actions'
 import { middleware as draftFiltersMiddleware } from './draft_filters/middleware'
+import { setAllLayoutComponents } from './layout_components/actions'
 
 const dashboardSuccess = store => next => action => {
   next(action)
@@ -15,6 +16,7 @@ const dashboardSuccess = store => next => action => {
     // here and then setFilters to that result
     store.dispatch(setFilters(dashboard.filters))
     store.dispatch(setElements(dashboard.elements))
+    store.dispatch(setAllLayoutComponents(dashboard.layoutComponents))
   }
 }
 

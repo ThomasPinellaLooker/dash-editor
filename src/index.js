@@ -23,7 +23,23 @@ const dashboard = {
     },
   },
   elements: {
-    '1': 'oi'
+    '1': 'oi',
+  },
+  layoutComponents: {
+    '1': {
+      id: '1',
+      width: 3,
+      height: 2,
+      row: 0,
+      column: 0,
+    },
+    '2': {
+      id: '2',
+      width: 2,
+      height: 2,
+      column: 4,
+      row: 2,
+    }
   }
 }
 

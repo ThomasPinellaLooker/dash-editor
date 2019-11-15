@@ -3,6 +3,7 @@ import { getDashboards } from '../dashboards/selectors'
 import { getSavedOffDashboard } from './selectors'
 import { setFilters } from '../dashboards/filters/actions'
 import { setElements } from '../dashboards/elements/actions'
+import { setAllLayoutComponents } from '../dashboards/layout_components/actions'
 
 const saveOffDashboard = store => next => action => {
   next(action)
@@ -20,6 +21,7 @@ const copyBackDashboard = store => next => action => {
     const dashboard = getSavedOffDashboard(store.getState())
     store.dispatch(setFilters(dashboard.filters))
     store.dispatch(setElements(dashboard.elements))
+    store.dispatch(setAllLayoutComponents(dashboard.layoutComponents))
 
     next(copyBackSuccess())
   }
