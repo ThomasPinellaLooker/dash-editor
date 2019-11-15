@@ -4,22 +4,23 @@ import { updateFilter } from '../../data/dashboards/filters/actions'
 import { Filter } from './components/Filter'
 import { ConnectedFilterEditor } from './components/FilterEditor'
 import { Modal } from './components/Modal'
-import { onFilterEditorOpen, onFilterEditorClose } from '../../data/dashboards/draft_filters/actions'
+import { getDashboardFilters } from '../../data/dashboards/filters/selectors'
+import { attemptSaveOff } from '../../data/dashboards/saved_off_filters/actions'
 
-const Filters = ({ inEditMode, filters, updateFilter, openFilterEditor, closeFilterEditor }) => {
+const Filters = ({ inEditMode, filters, updateFilter, openFilterEditor }) => {
 
   const [editorIsOpen, setEditorOpen] = React.useState(false)
   const [filterSelected, setEditFilter] = React.useState(undefined)
 
   const handleEditButtonClick = (filterId) => {
-    openFilterEditor(filterId)
+    openFilterEditor()
     setEditorOpen(true)
     setEditFilter(filterId)
   }
 
   const handleExitClick = () => {
     setEditorOpen(false)
-    closeFilterEditor()
+    setEditFilter(undefined)
   }
 
   const filterComponents = Object.values(filters).map(filter => {
@@ -50,7 +51,7 @@ const Filters = ({ inEditMode, filters, updateFilter, openFilterEditor, closeFil
 }
 
 const mapStateToProps = (state, props) => ({
-  filters: state.data.dashboards.filters,
+  filters: getDashboardFilters(state),
   inEditMode: state.data.editDashboardMode.inEditMode,
 })
 
@@ -59,11 +60,8 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(updateFilter(id, value))
   },
   openFilterEditor: (filterId) => {
-    dispatch(onFilterEditorOpen(filterId))
+    dispatch(attemptSaveOff(filterId))
   },
-  closeFilterEditor: () => (
-    dispatch(onFilterEditorClose())
-  )
 })
 
 export const ConnectedFilters = connect(

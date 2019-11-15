@@ -2,15 +2,16 @@ import * as React from 'react'
 import { Filter } from './Filter'
 import { connect } from 'react-redux'
 import { updateFilter } from '../../../data/dashboards/filters/actions'
-import { attemptSaveChanges } from '../../../data/dashboards/draft_filters/actions'
+import { attemptCopyBack, erase } from '../../../data/dashboards/saved_off_filters/actions'
 
-export const FilterEditor = ({ filter, onExitClick, updateFilter, save }) => {
+export const FilterEditor = ({ filter, onExitClick, updateFilter, cancel, save }) => {
 
   const handleChange = (event) => {
     updateFilter(event.currentTarget.value)
   }
 
   const handleCancel = () => {
+    cancel()
     onExitClick()
   }
 
@@ -36,15 +37,18 @@ export const FilterEditor = ({ filter, onExitClick, updateFilter, save }) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  filter: state.data.dashboards.draftFilters[props.filterId] || { [props.filterId]: {} },
+  filter: state.data.dashboards.filters[props.filterId] || { [props.filterId] : {} }
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
   updateFilter: (value) => {
     dispatch(updateFilter(props.filterId, value))
   },
+  cancel: () => {
+    dispatch(attemptCopyBack())
+  },
   save: () => {
-    dispatch(attemptSaveChanges())
+    dispatch(erase())
   }
 })
 

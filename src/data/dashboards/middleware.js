@@ -1,7 +1,7 @@
 import { dashboardsActions } from './actions'
 import { setFilters } from './filters/actions'
 import { setElements } from './elements/actions'
-import { middleware as draftFiltersMiddleware } from './draft_filters/middleware'
+import { middleware as savedOffFiltersMiddleware } from './saved_off_filters/middleware'
 import { setAllLayoutComponents } from './layout_components/actions'
 
 const dashboardSuccess = store => next => action => {
@@ -22,5 +22,5 @@ const dashboardSuccess = store => next => action => {
 
 export const middleware = [
   dashboardSuccess,
-  ...draftFiltersMiddleware,
+  ...savedOffFiltersMiddleware,
 ]

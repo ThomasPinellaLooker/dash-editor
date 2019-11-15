@@ -1,9 +1,9 @@
 import { savedOffDashboardActions, saveOffSuccess, copyBackSuccess } from './actions'
 import { getDashboards } from '../dashboards/selectors'
 import { getSavedOffDashboard } from './selectors'
-import { setFilters } from '../dashboards/filters/actions'
 import { setElements } from '../dashboards/elements/actions'
 import { setAllLayoutComponents } from '../dashboards/layout_components/actions'
+import { setFilters } from '../dashboards/filters/actions'
 
 const saveOffDashboard = store => next => action => {
   next(action)
