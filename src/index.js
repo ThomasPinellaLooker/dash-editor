@@ -10,14 +10,17 @@ import { dashboardSuccess } from './data/dashboards/actions'
 const dashboard = {
   filters: {
     '1': {
+      title: 'first filter',
       id: '1',
       value: '23'
     },
     '2': {
+      title: 'second filter',
       id: '2',
       value: '24'
     },
     '3': {
+      title: 'third filter',
       id: '3',
       value: '3434'
     },

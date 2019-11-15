@@ -1,10 +1,16 @@
 import * as React from 'react'
 import { Filter } from './Filter'
 import { connect } from 'react-redux'
-import { updateFilter } from '../../../data/dashboards/filters/actions'
+import { updateFilter, setTitle } from '../../../data/dashboards/filters/actions'
 import { attemptCopyBack, erase } from '../../../data/dashboards/saved_off_filters/actions'
 
-export const FilterEditor = ({ filter, onExitClick, updateFilter, cancel, save }) => {
+export const FilterEditor = ({ filter, onExitClick, updateFilter, cancel, save, saveTitle }) => {
+
+  const [title, setTitle] = React.useState(filter.title || '')
+
+  const handleTitleChange = (event) => {
+    setTitle(event.currentTarget.value)
+  }
 
   const handleChange = (event) => {
     updateFilter(event.currentTarget.value)
@@ -16,14 +22,24 @@ export const FilterEditor = ({ filter, onExitClick, updateFilter, cancel, save }
   }
 
   const handleSave = () => {
+    saveTitle(title)
     save()
     onExitClick()
   }
 
   return (
-    <div>
-      <div>
+    <div style={{ padding: '15px' }}>
+      <h1>
         Edit Filter:
+      </h1>
+      <div>
+        Set Title:
+      </div>
+      <div>
+        <input onChange={handleTitleChange} value={title} />
+      </div>
+      <div style={{ marginTop: '20px' }}>
+        Configure Default Value:
       </div>
       <Filter onChange={handleChange} filter={filter} />
       <div
@@ -49,6 +65,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
   save: () => {
     dispatch(erase())
+  },
+  saveTitle: (title) => {
+    dispatch(setTitle(props.filterId, title))
   }
 })
 

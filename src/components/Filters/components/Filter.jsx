@@ -19,7 +19,10 @@ export const Filter = ({ onChange, filter }) => {
   })
   return (
     <div style={{ paddingLeft: '10px' }}>
-      <input onChange={onChange} value={filter.value} onClick={handleClick} onBlur={handleBlur} />
+      <div>
+        {filter.title}
+      </div>
+      <input onChange={onChange} value={filter.value || ''} onClick={handleClick} onBlur={handleBlur} />
       {filter.suggestions && dropdownVisible && 
         <div
           style={{

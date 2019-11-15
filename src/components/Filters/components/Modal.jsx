@@ -18,7 +18,9 @@ export const Modal = ({ children }) => {
         top: '20%',
         minHeight: '50%',
         width: '50%',
-        backgroundColor: 'green',
+        backgroundColor: 'rgba(230,240,250,1.0)',
+        border: '2px solid rgba(100,140,150,1.0)',
+        borderRadius: '25px',
       }}>
         {children}
       </div>

@@ -1,5 +1,4 @@
 import { filterActions } from './actions'
-import { draftFiltersActions } from '../draft_filters/actions'
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -21,13 +20,17 @@ export const reducer = (state = {}, action) => {
           suggestions,
         }
       }
-    case filterActions.SET_FILTERS:
-      return action.payload.filters
-    case draftFiltersActions.SAVE_CHANGES_SUCCESS:
+    case filterActions.SET_TITLE:
+      const { id: _id, title } = action.payload
       return {
         ...state,
-        ...action.payload.filters,
+        [_id]: {
+          ...state[_id],
+          title,
+        }
       }
+    case filterActions.SET_FILTERS:
+      return action.payload.filters
     default:
       return state
   }
