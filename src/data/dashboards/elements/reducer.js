@@ -15,7 +15,6 @@ export const reducer = (state = {}, action) => {
         },
       }
     case editDashboardModeActions.DELETE_ELEMENT:
-      console.log(state)
       const newState = Object.keys(state)
         .filter(key => key !== action.payload.id)
         .reduce((acc, key) => {
@@ -26,7 +25,6 @@ export const reducer = (state = {}, action) => {
             }
           }
         }, {})
-      console.log(newState)
       return newState
     default:
       return state

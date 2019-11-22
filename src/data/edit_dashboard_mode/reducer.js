@@ -28,7 +28,6 @@ export const reducer = (state = initialState, action) => {
         ]
       }
     case editDashboardModeActions.DELETE_ELEMENT:
-      console.log(state.deletedElementIds)
       return {
         ...state,
         deletedElementIds: [

@@ -28,8 +28,6 @@ function* cancelChangesSaga() {
 
   const elementsToDelete = [...deletedElementIds, ...addedElementIds]
 
-  console.log(addedElementIds)
-
   yield call(deleteElements, elementsToDelete)
   yield call(deleteLayoutComponents, elementsToDelete)
 
