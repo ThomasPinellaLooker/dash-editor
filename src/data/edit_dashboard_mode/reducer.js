@@ -1,7 +1,9 @@
 import { editDashboardModeActions } from "./action"
 
 const initialState = {
-  inEditMode: false
+  inEditMode: false,
+  deletedElementIds: [],
+  addedElementIds: [],
 }
 
 export const reducer = (state = initialState, action) => {
@@ -16,6 +18,23 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         inEditMode: false,
+      }
+    case editDashboardModeActions.ADD_ELEMENT_SUCCESS:
+      return {
+        ...state,
+        addedElementIds: [
+          ...state.addedElementIds,
+          action.payload.id
+        ]
+      }
+    case editDashboardModeActions.DELETE_ELEMENT:
+      console.log(state.deletedElementIds)
+      return {
+        ...state,
+        deletedElementIds: [
+          ...state.deletedElementIds,
+          action.payload.id
+        ]
       }
     default:
       return state

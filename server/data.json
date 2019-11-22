@@ -1,0 +1,39 @@
+{
+  "layoutComponents": {
+    "1": {
+      "id": "1",
+      "width": 3,
+      "height": 2,
+      "row": 0,
+      "column": 0
+    }
+  },
+  "elements": {
+    "1": {
+      "id": "1"
+    },
+    "0.5613701933971968": {
+      "id": "0.5613701933971968"
+    }
+  },
+  "titles": {},
+  "filters": {
+    "1": {
+      "title": "first filter",
+      "id": "1",
+      "value": "23"
+    },
+    "2": {
+      "title": "second filter",
+      "id": "2",
+      "value": "24"
+    },
+    "3": {
+      "title": "third filter",
+      "id": "3",
+      "value": "3434"
+    }
+  },
+  "queries": {},
+  "savedOffFilters": {}
+}

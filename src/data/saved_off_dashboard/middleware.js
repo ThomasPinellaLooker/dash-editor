@@ -1,9 +1,5 @@
-import { savedOffDashboardActions, saveOffSuccess, copyBackSuccess } from './actions'
+import { savedOffDashboardActions, saveOffSuccess } from './actions'
 import { getDashboards } from '../dashboards/selectors'
-import { getSavedOffDashboard } from './selectors'
-import { setElements } from '../dashboards/elements/actions'
-import { setAllLayoutComponents } from '../dashboards/layout_components/actions'
-import { setFilters } from '../dashboards/filters/actions'
 
 const saveOffDashboard = store => next => action => {
   next(action)
@@ -14,17 +10,4 @@ const saveOffDashboard = store => next => action => {
   }
 }
 
-const copyBackDashboard = store => next => action => {
-  next(action)
-
-  if (action.type === savedOffDashboardActions.ATTEMPT_COPY_BACK) {
-    const dashboard = getSavedOffDashboard(store.getState())
-    store.dispatch(setFilters(dashboard.filters))
-    store.dispatch(setElements(dashboard.elements))
-    store.dispatch(setAllLayoutComponents(dashboard.layoutComponents))
-
-    next(copyBackSuccess())
-  }
-}
-
-export const middleware = [saveOffDashboard, copyBackDashboard]
+export const middleware = [saveOffDashboard]

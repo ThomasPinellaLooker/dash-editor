@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { connect} from 'react-redux'
-import { enterEditMode, saveEditMode, cancelEditMode } from '../../data/edit_dashboard_mode/action'
+import { enterEditMode, saveEditMode, cancelEditMode, addElement } from '../../data/edit_dashboard_mode/action'
+import { inEditMode } from '../../data/saved_off_dashboard/selectors'
 
 const EditBar = ({
+  addElement,
   inEditMode,
   enterEditMode,
   saveChanges,
@@ -22,8 +24,11 @@ const EditBar = ({
     <button onClick={cancelChanges}>Cancel</button>
   ) : null
   return (
-  <div style={{ display: 'flex', backgroundColor: 'purple' }}>
-    <div style={{ display: 'flex', marginLeft: 'auto' }}>
+  <div style={{ display: 'flex', backgroundColor: 'purple', justifyContent: 'space-between'}}>
+    <div>
+      {inEditMode && <button onClick={addElement}>Add Tile</button>}
+    </div>
+    <div style={{ display: 'flex' }}>
       {cancelButton}
       <button onClick={handleClick}>{buttonText}</button>
     </div>
@@ -32,7 +37,7 @@ const EditBar = ({
 }
 
 const mapStateToProps = (state, props) => ({
-  inEditMode: state.data.editDashboardMode.inEditMode,
+  inEditMode: inEditMode(state)
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -44,6 +49,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
   cancelChanges: () => {
     dispatch(cancelEditMode())
+  },
+  addElement: () => {
+    dispatch(addElement())
   }
 })
 

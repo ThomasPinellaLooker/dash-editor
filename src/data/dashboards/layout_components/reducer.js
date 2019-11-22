@@ -1,4 +1,5 @@
 import { layoutComponentsActions } from './actions'
+import { editDashboardModeActions } from '../../edit_dashboard_mode/action'
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -13,6 +14,18 @@ export const reducer = (state = {}, action) => {
           ...layoutComponent,
         },
       }
+    case editDashboardModeActions.DELETE_ELEMENT:
+      const newState = Object.keys(state)
+        .filter(key => key !== action.payload.id)
+        .reduce((acc, key) => {
+          return {
+            ...acc,
+            [key]: {
+              ...state[key],
+            }
+          }
+        }, {})
+      return newState
     default:
       return state
   }
