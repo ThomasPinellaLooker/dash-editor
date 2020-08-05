@@ -2,11 +2,13 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { getLayoutComponents } from '../../data/dashboards/layout_components/selectors'
 import { ConnectedElement } from './components/Element'
+import { HighElement } from './components/HighElement'
 
 export const DashboardBody = ({ layoutComponents }) => {
-  const lcs = Object.values(layoutComponents).map(lc => {
-    return <ConnectedElement key={lc.id} layoutComponent={lc} />
-  })
+  // const lcs = Object.values(layoutComponents).map(lc => {
+  //   return <ConnectedElement key={lc.id} layoutComponent={lc} />
+  // })
+
   return (
     <div
       style={{
@@ -15,7 +17,7 @@ export const DashboardBody = ({ layoutComponents }) => {
         position: 'relative',
       }}
     >
-      {lcs}
+      <HighElement />
     </div>
   )
 }
